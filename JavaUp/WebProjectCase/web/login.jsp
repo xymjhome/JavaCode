@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <head>
@@ -110,15 +112,15 @@ font {
 	
 	<div class="col-md-5">
 				<div style="width:440px;border:1px solid #E7E7E7;padding:20px 0 20px 30px;border-radius:5px;margin-top:60px;background:#fff;">
-				<font>会员登录</font>USER LOGIN
+				<font>会员登录</font>USER LOGIN <font color="red">${msg }</font>
 
 				<div>&nbsp;</div>
-<form class="form-horizontal" action="http://localhost:8080/WebProjectCase/login" method="post">
+<form class="form-horizontal" action="${pageContext.request.contextPath }/login" method="post">
   
  <div class="form-group">
     <label for="username" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username">
+      <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username" value="${cookie.saveName.value}">
     </div>
   </div>
    <div class="form-group">
@@ -130,10 +132,10 @@ font {
    <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="请输入验证码">
+      <input type="text" class="form-control" id="inputPassword3" placeholder="请输入验证码" name="checkCode">
     </div>
     <div class="col-sm-3">
-      <img src="./image/captcha.jhtml"/>
+      <img src="${pageContext.request.contextPath }/code" title="看不清，换一张" onclick="changeImg(this)"/>
     </div>
     
   </div>
@@ -144,7 +146,7 @@ font {
           <input type="checkbox"> 自动登录
         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input type="checkbox"> 记住用户名
+          <input type="checkbox" name="savename" value="ok"> 记住用户名
         </label>
       </div>
     </div>
@@ -182,4 +184,11 @@ font {
 		<div style="text-align: center;margin-top: 5px;margin-bottom:20px;">
 			Copyright &copy; 2005-2016 传智商城 版权所有
 		</div>
-</body></html>
+</body>
+<script type="text/javascript">
+	function changeImg(obj) {
+	    obj.src = "${pageContext.request.contextPath}/code?id="+Math.random();
+
+    }
+</script>
+</html>

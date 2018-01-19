@@ -11,6 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+    ${user.username}:欢迎回来！！！
+   <!-- <a href="${pageContext.request.contextPath }/login">登陆servlet</a>   -->
   </body>
 </html>

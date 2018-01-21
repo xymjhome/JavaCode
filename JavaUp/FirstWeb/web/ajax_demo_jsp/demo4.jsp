@@ -9,32 +9,35 @@
 <script type="text/javascript">
 	$(function(){
 		//页面加载成功 查询所有的省
-		$.get("/day15/selectPro",function(d){
-			//alert(d)
-			var $pro=$("#proId");
-			$(d).each(function(){
-				$pro.append($("<option value="+this.provinceid+">"+this.name+"</option>"));
-			});
-		},"json");
+
+		$.get("/FirstWeb/selectPro",function (d) {
+			//alert(d);
+            var $pro = $("#proId");
+			$(d).each(function () {
+                $pro.append($("<option value="+this.provinceid+">"+this.name+"</option>"));
+            });
+        },"json");
 		
 		
 		//给省份下拉选派发change事件
-		$("#proId").change(function(){
+        $("#proId").change(function () {
 			//获取省份id
-			var $pid=$(this).val();
+			var $pid = $(this).val();
 			//alert($pid);
 			//发送ajax请求 查询所有的市
-			$.get("/day15/selectCity",{"pid":$pid},function(obj){
+
+			$.get("/FirstWeb/selectCity",{"pid":$pid},function (obj) {
 				//alert(obj);
-				var $city=$("#cityId");
-				$city.html("<option>-请选择-</option>");
-				if(obj!=null){
-					$(obj).each(function(){
-						$city.append($("<option value='"+this.cityid+"'>"+this.name+"</option>"));
-					});
-				}
-			},"json");
-		});
+                var $cid = $("#cityId");
+                $cid.html("<option>-请选择-</option>");
+                if(obj!=null) {
+                    $(obj).each(function () {
+                        $cid.append($("<option value="+this.cityid+">"+this.name+"</option>"));
+                    });
+                }
+            },"json");
+        });
+
 	})
 </script>
 <title>省市联动</title>

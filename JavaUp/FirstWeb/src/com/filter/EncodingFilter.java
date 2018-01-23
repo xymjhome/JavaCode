@@ -19,7 +19,8 @@ import java.util.Map;
      3.对需要加强的方法进行加强
      4.对不需要加强的方法调用原来的方法
  */
-@WebFilter(filterName = "EncodingFilter",urlPatterns = "/*")
+//@WebFilter(filterName = "EncodingFilter",urlPatterns = "/*")
+@WebFilter(filterName = "EncodingFilter")
 public class EncodingFilter implements Filter {
     public void destroy() {
     }
@@ -86,14 +87,14 @@ class MyRequest extends HttpServletRequestWrapper{
          * 若为get 将map中的值遍历编码就可以了
          */
         String method = request.getMethod();
-        if ("post".equals(method)){
+        if ("post".equalsIgnoreCase(method)){
             try {
                 request.setCharacterEncoding("utf-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             return request.getParameterMap();
-        }else if ("get".equals(method)){
+        }else if ("get".equalsIgnoreCase(method)){
             Map<String, String[]> map = super.getParameterMap();
             if (flag){
                 for (String key : map.keySet()){

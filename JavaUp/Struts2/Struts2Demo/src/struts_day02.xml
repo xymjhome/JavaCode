@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!--如果想完成动态方法访问的方式，需要开启一个常量，struts.enable.DynamicMethodInvocation = false，把值设置成true。-->
+    <!--* 注意：不同的Struts2框架的版本，该常量的值不一定是true或者false，需要自己来看一下。如果是false，需要自己开启。-->
+    <!--* 在struts.xml中开启该常量。-->
+    <!--* <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+
+    <!-- 演示Action的访问， -->
+    <package name="crm" namespace="/" extends="struts-default" >
+
+        <!-- 配置拦截器 -->
+        <!--<interceptors>-->
+        <!--<interceptor name="UserInterceptor" class="com.struts2.day02.interceptor.UserInterceptor"/>-->
+        <!--<interceptor-stack name="mystack">-->
+        <!--<interceptor-ref name="UserInterceptor">-->
+        <!--&lt;!&ndash; login方法不拦截 &ndash;&gt;-->
+        <!--<param name="excludeMethods">login</param>-->
+        <!--</interceptor-ref>-->
+        <!--<interceptor-ref name="defaultStack"/>-->
+        <!--</interceptor-stack>-->
+        <!--</interceptors>-->
+
+        <interceptors>
+            <interceptor name="UserInterceptor" class="com.struts2.day02.interceptor.UserInterceptor"/>
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="UserInterceptor">
+                    <param name="excludeMethods">login</param>
+                </interceptor-ref>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <global-results>
+            <result name="login">/login.htm</result>
+        </global-results>
+
+        <!-- 通配符的方式 -->
+        <action name="user_*" class="com.struts2.day02.action.UserAction" method="{1}">
+            <result name="login">/login.htm</result>
+            <result name="success">/jsp/success.jsp</result>
+            <!-- 只要是引用自己的拦截器，默认栈的拦截器就不执行了，必须要手动引入默认栈 -->
+            <!--<interceptor-ref name="DemoInterceptor"/>-->
+            <!--<interceptor-ref name="defaultStack"/>-->
+            <interceptor-ref name="myStack"/>
+        </action>
+
+        <action name="customer_*" class="com.struts2.day02.action.CustomerAction" method="{1}">
+            <result name="success">/jsp/success.jsp</result>
+            <interceptor-ref name="UserInterceptor"/>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+    </package>
+
+    <!--2. 需要在struts.xml中进行拦截器的配置，配置一共有两种方式-->
+    <!--&lt;!&ndash; 定义了拦截器 第一种方式-->
+    <!--<interceptors>-->
+        <!--<interceptor name="DemoInterceptor" class="com.itheima.interceptor.DemoInterceptor"/>-->
+    <!--</interceptors>-->
+    <!--&ndash;&gt;-->
+
+    <!--&lt;!&ndash; 第二种方式：定义拦截器栈 &ndash;&gt;-->
+    <!--<interceptors>-->
+        <!--<interceptor name="DemoInterceptor" class="com.itheima.interceptor.DemoInterceptor"/>-->
+        <!--&lt;!&ndash; 定义拦截器栈 &ndash;&gt;-->
+        <!--<interceptor-stack name="myStack">-->
+            <!--<interceptor-ref name="DemoInterceptor"/>-->
+            <!--<interceptor-ref name="defaultStack"/>-->
+        <!--</interceptor-stack>-->
+    <!--</interceptors>-->
+
+    <!--<action name="userAction" class="com.itheima.demo3.UserAction">-->
+        <!--&lt;!&ndash; 只要是引用自己的拦截器，默认栈的拦截器就不执行了，必须要手动引入默认栈 -->
+        <!--<interceptor-ref name="DemoInterceptor"/>-->
+        <!--<interceptor-ref name="defaultStack"/>-->
+        <!--&ndash;&gt;-->
+
+        <!--&lt;!&ndash; 引入拦截器栈就OK &ndash;&gt;-->
+        <!--<interceptor-ref name="myStack"/>-->
+    <!--</action>-->
+</struts>

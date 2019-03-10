@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!--如果想完成动态方法访问的方式，需要开启一个常量，struts.enable.DynamicMethodInvocation = false，把值设置成true。-->
+    <!--* 注意：不同的Struts2框架的版本，该常量的值不一定是true或者false，需要自己来看一下。如果是false，需要自己开启。-->
+    <!--* 在struts.xml中开启该常量。-->
+    <!--* <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+    <!-- 编写常量
+	<constant name="struts.action.extension" value="do,,"></constant>
+	-->
+    <!-- 包结构 -->
+    <package name="demo1" namespace="/" extends="struts-default">
+        <!-- 配置Action -->
+        <!--<action name="hello" class="com.struts2.day01.action.HelloAction" method="sayHello">-->
+        <!-- 配置跳转的页面，路径的写法：在Struts2框架中，不管是转发还是重定向，都不用写项目名 -->
+            <!--<result name="ok">/demo1/suc.jsp</result>-->
+        <!--</action>-->
+        <!--默认走execute()方法-->
+        <action name="hello" class="com.struts2.day01.action.HelloAction" >
+            <result name="ok">/demo1/suc.jsp</result>
+        </action>
+
+        <!-- POJO类的方式 -->
+        <action name="demo1Action" class="com.struts2.day01.action1.Demo1Action" />
+
+        <!-- 实现Action接口的方式 -->
+        <action name="demo2Action" class="com.struts2.day01.action1.Demo2Action">
+            <result name="login">/demo1/suc.jsp</result>
+        </action>
+
+        <!-- 继承ActionSupport类的方式 -->
+        <action name="demo3Action" class="com.struts2.day01.action1.Demo3Action"/>
+    </package>
+
+    <!-- 演示Action的访问， -->
+    <package name="demo2" namespace="/" extends="struts-default" >
+        <!-- 传统方式 -->
+        <action name="saveCust" class="com.struts2.day01.action2.CustomerAction" method="save"/>
+        <action name="delCust" class="com.struts2.day01.action2.CustomerAction" method="delete"/>
+
+        <!-- 通配符的方式 -->
+        <action name="linkman_*" class="com.struts2.day01.action2.LinkManAction" method="{1}">
+            <result name="saveOk">/demo1/suc.jsp</result>
+            <result name="deleteOk">/demo1/suc.jsp</result>
+        </action>
+
+        <!-- 配置动态方法访问 -->
+        <action name="user" class="com.struts2.day01.action2.UserAction">
+            <result name="saveOk">/demo1/suc.jsp</result>
+            <result name="deleteOk">/demo1/suc.jsp</result>
+        </action>
+    </package>
+
+    <!-- 引入其他的配置文件 -->
+    <include file="com/struts2/user/struts_user.xml"/>
+</struts>

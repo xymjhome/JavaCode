@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        <!--* 必须有的配置-->
+        <!--* 数据库连接信息:-->
+        <!--hibernate.connection.driver_class           &#45;&#45; 连接数据库驱动程序-->
+        <!--hibernate.connection.url                    &#45;&#45; 连接数据库URL-->
+        <!--hibernate.connection.username               &#45;&#45; 数据库用户名-->
+        <!--hibernate.connection.password               &#45;&#45; 数据库密码-->
+
+        <!--* 方言:-->
+        <!--hibernate.dialect                           &#45;&#45; 操作数据库方言-->
+
+        <!--* 可选的配置-->
+        <!--* hibernate.show_sql                            &#45;&#45; 显示SQL-->
+        <!--* hibernate.format_sql                          &#45;&#45; 格式化SQL-->
+        <!--* hibernate.hbm2ddl.auto                        &#45;&#45; 通过映射转成DDL语句-->
+        <!--* create                &#45;&#45; 每次都会创建一个新的表.-&#45;&#45;测试的时候-->
+        <!--* create-drop           &#45;&#45; 每次都会创建一个新的表,当执行结束之后,将创建的这个表删除.-&#45;&#45;测试的时候-->
+        <!--* update                &#45;&#45; 如果有表,使用原来的表.没有表,创建一个新的表.同时更新表结构.-->
+        <!--* validate              &#45;&#45; 如果有表,使用原来的表.同时校验映射文件与表中字段是否一致如果不一致就会报错.-->
+
+        <!--* 加载映射-->
+        <!--* 如果XML方式：<mapping resource="cn/itcast/hibernate/domain/User.hbm.xml" />-->
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_day01</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <property name="hibernate.show_sql">true</property>
+
+        <!--通过getCurrentSession()   方法可以获取此线程绑定的方法，添加此配置-->
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!--加载映射-->
+        <mapping resource="com/hibernate/domain/Customer.hbm.xml.tld"/>
+
+    </session-factory>
+</hibernate-configuration>

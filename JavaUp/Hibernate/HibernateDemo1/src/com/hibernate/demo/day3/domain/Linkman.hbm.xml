@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.hibernate.demo.day3.domain.Linkman" table="cst_linkman">
+        <id name="lkmId" column="lkm_id">
+            <generator class="native"/>
+        </id>
+
+        <property name="lkmName" column="lkm_name"/>
+        <property name="lkmGender" column="lkm_gender"/>
+        <property name="lkmPhone" column="lkm_phone"/>
+        <property name="lkmMobile" column="lkm_mobile"/>
+        <property name="lkmEmail" column="lkm_email"/>
+        <property name="lkmQq" column="lkm_qq"/>
+        <property name="lkmPosition" column="lkm_position"/>
+        <property name="lkmMemo" column="lkm_memo"/>
+
+        <!-- 先配置多方
+            name	当前JavaBean中的属性
+            class	属性的全路径
+            column	外键的字段
+
+             在多端进行配置级联cascade="save-update"，可以实现单方数据保存来保存所有数据
+            但是一般实现是在一端进行外键维护，在多端进行级联的设置
+        -->
+        <many-to-one name="customer" class="com.hibernate.demo.day3.domain.Customer" column="lkm_cust_id" cascade="save-update,delete"/>
+    </class>
+</hibernate-mapping>
+

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码实现</title>
+</head>
+<body>
+    <img src="/FirstWeb/code" title="看不清，换一种图片" onclick="changeImg(this)">
+</body>
+<script type="text/javascript">
+    function changeImg(obj) {
+        obj.src = "/FirstWeb/code?i="+Math.random();
+    }
+</script>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="userService" class="com.spring.day01.demo2.UserServiceImpl" init-method="init" destroy-method="destory">
+
+    </bean>
+
+    <!-- 演示的依赖注入 -->
+    <bean name="customerDao" class="com.spring.day01.demo3.CustomerDaoImpl" ></bean>
+    <bean name="customerService" class="com.spring.day01.demo3.CustomerServiceImpl" >
+        <property name="customerDao" ref="customerDao"/>
+    </bean>
+
+    <!-- 演示的构造方法的注入的方式 -->
+    <bean name="car1" class="com.spring.day01.demo4.Car1">
+
+        <!--<constructor-arg index="0" value="哈哈哈"/>-->
+        <!--<constructor-arg index="1" value="100000"/>-->
+        <constructor-arg name="cname" value="大奔"/>
+        <constructor-arg name="price" value="300000"/>
+    </bean>
+
+    <bean name="person" class="com.spring.day01.demo4.Person">
+        <constructor-arg name="pname" value="xiaoming"/>
+        <constructor-arg name="car1" ref="car1"/>
+    </bean>
+
+    <!--采用set方法注入-->
+    <!--<bean name="car2" class="com.spring.day01.demo4.Car2">-->
+        <!--<property name="cname" value="test"/>-->
+        <!--<property name="price" value="10000"/>-->
+    <!--</bean>-->
+
+    <!--采用p名称空间注入的方式（了解） -->
+    <!--<bean name="car2" class="com.spring.day01.demo4.Car2" p:cname="p namespace" p:price="10000"/>-->
+
+    <!-- 使用SPEL方式注入 -->
+    <bean name="car2" class="com.spring.day01.demo4.Car2">
+        <property name="cname" value="#{'SPEL 方式'}"/>
+        <property name="price" value="#{'1000'}"/>
+    </bean>
+
+    <bean name="user" class="com.spring.day01.demo4.User">
+        <property name="arrs">
+            <list>
+                <value>O(∩_∩)O哈哈~</value>
+                <value>O(∩_∩)O哈哈~2</value>
+                <value>O(∩_∩)O哈哈~3</value>
+            </list>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>list1</value>
+                <value>list2</value>
+                <value>list31</value>
+            </list>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="1" value="map1"/>
+                <entry key="2" value="map2"/>
+                <entry key="3" value="map3"/>
+            </map>
+        </property>
+
+        <property name="pro">
+            <!--<map>-->
+                <!--<entry key="1" value="pro1"/>-->
+                <!--<entry key="2" value="pro2"/>-->
+                <!--<entry key="3" value="pro3"/>-->
+            <!--</map>-->
+            <props>
+                <prop key="1">pro1</prop>
+                <prop key="2">pro2</prop>
+                <prop key="4">pro3</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 引入其他的配置文件  -->
+    <import resource="applicationContext2_day01.xml"/>
+
+
+</beans>

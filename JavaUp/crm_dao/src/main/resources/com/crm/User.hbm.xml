@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.crm.domain.User" table="sys_user">
+        <!--<id name="userId" type="java.lang.Long">-->
+            <!--<column name="user_id"/>-->
+            <!--&lt;!&ndash; 6种生成策略  ： identity,native,sequence,uuid,increment, assigned  &ndash;&gt;-->
+            <!--<generator class="native"/>-->
+        <!--</id>-->
+
+        <!--<property name="userCode" type="string">-->
+            <!--<column name="user_code" length="32" not-null="true"></column>-->
+        <!--</property>-->
+        <!--<property name="userName" column="user_name"></property>-->
+        <!--<property name="userPassword" column="user_password"></property>-->
+        <!--<property name="userState" column="user_state"></property>-->
+
+        <id name="userId" column="user_id">
+            <generator class="native"/>
+        </id>
+
+        <property name="userCode" column="user_code"/>
+        <property name="userName" column="user_name"/>
+        <property name="userPassword" column="user_password"/>
+        <property name="userState" column="user_state"/>
+
+    </class>
+</hibernate-mapping>

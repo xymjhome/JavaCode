@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"       
+	xmlns:p="http://www.springframework.org/schema/p"  
+	xmlns:context="http://www.springframework.org/schema/context"   
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+	http://www.springframework.org/schema/beans/spring-beans.xsd    
+	http://www.springframework.org/schema/aop    
+	http://www.springframework.org/schema/aop/spring-aop.xsd    
+	http://www.springframework.org/schema/tx    
+	http://www.springframework.org/schema/tx/spring-tx.xsd    
+	http://www.springframework.org/schema/context    
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- befor begin project test action 在web层与前端直接交互，需在action对应的spring配置文件中配置 -->
+	<!-- service -->
+	<!--<bean id="customerAction" class="com.crm.web.CustomerAction">-->
+	<!--<property name="customerService" ref="customerService"></property>-->
+	<!--</bean>-->
+
+	<!-- 配置客户模块 action -->
+	<!--<bean id="customerAction" class="com.itheima.web.action.CustomerAction" scope="prototype">-->
+		<!--<property name="customerService" ref="customerService"/>-->
+	<!--</bean>-->
+
+	<!-- 配置用户的模块 action -->
+	<bean id="userAction" class="com.crm.web.UserAction" scope="prototype">
+		<property name="userService" ref="userService"/>
+	</bean>
+
+
+
+
+
+
+
+
+</beans>
+	
